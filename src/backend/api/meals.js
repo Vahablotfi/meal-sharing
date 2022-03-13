@@ -126,9 +126,10 @@ router.post("/", async(request, response) => {
     try {
         // knex syntax for selecting things. Look up the documentation for knex for further info
         const insertRequest = request.body;
-        console.log(insertRequest);
+       
         const meals = await knex("meals").insert({
-
+             
+            id: insertRequest.id,
             title: insertRequest.title,
             description: insertRequest.description,
             location: insertRequest.location,
@@ -143,6 +144,45 @@ router.post("/", async(request, response) => {
     }
 });
 
+
+
+router.put("/", async (request, response) => {
+  try {
+    // knex syntax for selecting things. Look up the documentation for knex for further info
+      const requestedId = Number(request.query.id);
+      const result = await knex("meals")
+          .where("id", "=", requestedId)
+          .update(request.body);
+       if (request > 0) {
+      res.json({ message: "Updated" });
+    } else {
+      res.status(404).json({ error: "id does not exist" });
+    }
+      
+  } catch (error) {
+    throw error;
+  }
+});
+
+
+
+router.delete("/", async (request, response) => {
+    try {
+      const requestedId = Number(request.query.id);
+    // knex syntax for selecting things. Look up the documentation for knex for further info
+        const result = await knex("meals")
+            .where("id", "=", requestedId)
+            .del();
+         if (request > 0) {
+      response.json({ message: "Deleted" });
+    } else {
+      res.status(404).json({ error: "id does not exist" });
+    }
+    
+  } catch (error) {
+    throw error;
+  }
+});
 module.exports = router;
 
 
