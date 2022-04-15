@@ -1,132 +1,78 @@
 const express = require("express");
 const router = express.Router();
 const knex = require("../database");
+const  inputValidation  = require("../validations/mealsValidation")
+const validationFilter=require("../validations/filterValidation")
 
 
-router.get("/", async(request, response) => {
+const currentDate = new Date();
 
+router.get("/", validationFilter, async (request, response) => {
+    console.log('this is date',currentDate);
+     let meals = await knex("meals");
     try {
-        // knex syntax for selecting things. Look up the documentation for knex for further info
-        const meals = await knex("meals");
-
-        if (request.query.hasOwnProperty('id')) {
-
-            const requestId = Number(request.query.id);
-            const requestedMeal = await knex('meals')
+       
+        if ('id' in request.query) {
+               meals = await knex('meals')
                 .select()
-                .where('id', '=', requestId);
-
-            console.log(requestedMeal);
-            console.log(typeof(requestedMeal));
-            if (Object.keys((requestedMeal)).length !== 0) {
-
-                response.json(requestedMeal);
-            } else {
-                response.status(404).json(`No meal matches the id: ${requestId}`);
-            }
-
-        } else if (Object.keys(request.query).length > 1 &&
-            request.query.hasOwnProperty('maxPrice', 'limit')) {
-
-            const requestPrice = Number(request.query.maxPrice);
-            const requestLimit = Number(request.query.limit);
-            const mealFinder = meals.some(meal => meal.price <= requestPrice);
-
-            if (requestLimit !== 0 && mealFinder) {
-
-                const requestOrder = await knex('meals').select()
-                    .where('price', '<=', requestPrice)
-                    .limit(requestLimit)
-                    .orderBy('price');
-                response.json(requestOrder);
-            } else {
-                response.status(404).json(`NO meal is cheaper than ${requestPrice}`);
-            }
-
-        } else if (request.query.hasOwnProperty('maxPrice')) {
-
-            const requestPrice = Number(request.query.maxPrice);
-            const mealFinder = meals.some(meal => meal.price <= requestPrice);
-            const requestedMeal = await knex('meals')
+                .where('id', '=',request.query.id);
+        }
+        if ('maxPrice' in request.query) {
+            meals = await knex('meals')
                 .select()
-                .where('price', '<=', requestPrice);
-
-            if (Object.keys((requestedMeal)).length !== 0) {
-                response.json(requestedMeal);
-            } else {
-                response.status(404).json(`NO meal is cheaper than ${requestPrice}`);
-            }
-
-        } else if (request.query.hasOwnProperty('createdAfter')) {
-
-            const requestDate = new Date(request.query.createdAfter);
-            const mealFinder = meals.some(meal => meal.created_date > requestDate);
-            const requestedMeal = await knex('meals')
+                .where('price', '<=', request.query.maxPrice);
+        }
+        if ('createdAfter' in request.query) {
+            meals = await knex('meals')
                 .select()
-                .where('created_date', '>', requestDate);
-
-            if (Object.keys((requestedMeal)).length !== 0) {
-                response.json(requestedMeal);
-            } else {
-                response.status(404).json(`NO meal has been created after: ${requestDate}`);
-            }
-
-        } else if (request.query.hasOwnProperty('limit')) {
-            const requestLimit = Number(request.query.limit);
-            const requestedLimit = await knex('meals')
-                .select()
-                .limit(requestLimit);
-
-            if (requestLimit !== 0) {
-                response.json(requestedLimit);
-            } else {
-                response.status(400).json(`Limit request is not valid`)
-            }
-        } else if (request.query.hasOwnProperty('title')) {
-
-            const requestedTitle = (request.query.title).toLowerCase();
-            const requestedMeal = await knex('meals')
-                .select()
-                .where('title', 'like', `%${requestedTitle}%`);
-            if (Object.keys((requestedMeal)).length !== 0) {
-                response.json(requestedMeal);
-            } else {
-                response.status(404).send(`There is no meal with the title ${requestedTitle}`)
-            }
-        } else if (request.query.hasOwnProperty('availableReservations')) {
-
-            const requestedOrder = request.query;
+                .where('created_date', '>', request.query.createdAfter);
+        }
+        if ('availableReservations' in request.query) {
             const totalReservation = await knex('reservations')
                 .select("meal_id", "title", "max_number_of_guests")
                 .sum('number_of_guests AS reserved_guests')
                 .join('meals', "meal_id", "=", "meals.id")
                 .groupBy('meal_id');
 
-            const result = totalReservation.filter(reservation => Number(reservation.reserved_guests) < reservation.max_number_of_guests);
-
-            if (Object.values(requestedOrder) == 'true') {
-                response.json(result);
-            } else {
-                response.status(400).json(`request is not valid`)
-            }
-
-        } else {
-            response.json(meals);
+            meals = totalReservation.filter(reservation => 
+                Number(reservation.reserved_guests) < reservation.max_number_of_guests);
         }
+        if ('title' in request.query) {
+            meals = await knex('meals')
+                .select()
+                .where('title', 'like', `%${(request.query.title).toLowerCase()}%`);
+        }
+        if ('limit' in request.query) {
+             meals = await knex('meals')
+                .select()
+                .limit(request.query.limit);
+        }
+        if('maxPrice' in request.query &&
+            'limit' in request.query) {
+            meals = await knex('meals').select()
+                    .where('price', '<=', request.query.maxPrice)
+                    .limit(request.query.limit)
+                    .orderBy('price');
+                   }
+        response.send(meals);
+        
     } catch (error) {
         throw error;
     }
-
-});
-
+})
 
 
 
-router.post("/", async(request, response) => {
+
+
+
+
+
+
+router.post("/",inputValidation, async(request, response) => {
     try {
         // knex syntax for selecting things. Look up the documentation for knex for further info
         const insertRequest = request.body;
-       
         const meals = await knex("meals").insert({
              
             id: insertRequest.id,
@@ -136,47 +82,43 @@ router.post("/", async(request, response) => {
             Hosting_time: insertRequest.Hosting_time,
             max_number_of_guests: insertRequest.max_number_of_guests,
             price: insertRequest.price,
-            created_date: insertRequest.created_date
+            created_date: currentDate,
         });
         response.json(meals);
     } catch (error) {
         throw error;
     }
 });
+                
 
-
-
-router.put("/", async (request, response) => {
-  try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-      const requestedId = Number(request.query.id);
-      const result = await knex("meals")
-          .where("id", "=", requestedId)
-          .update(request.body);
-       if (request > 0) {
-      res.json({ message: "Updated" });
-    } else {
-      res.status(404).json({ error: "id does not exist" });
-    }
+router.put("/",validationFilter, async (request,response ) => {
+    try {
       
-  } catch (error) {
-    throw error;
-  }
+      const result = await knex("meals")
+          .where("id", "=", request.query.id)
+          .update(request.body);
+       if (result > 0) {
+      response.send({ message: "Updated" });
+    } else {
+      response.status(404).send({ error: "id does not exist" });
+    }
+    } catch (error) {
+        throw error; 
+    }     
 });
 
 
-
-router.delete("/", async (request, response) => {
+router.delete("/", validationFilter,async (request, response) => {
     try {
-      const requestedId = Number(request.query.id);
+   
     // knex syntax for selecting things. Look up the documentation for knex for further info
         const result = await knex("meals")
-            .where("id", "=", requestedId)
+            .where("id", "=", request.query.id)
             .del();
-         if (request > 0) {
+         if (result > 0) {
       response.json({ message: "Deleted" });
     } else {
-      res.status(404).json({ error: "id does not exist" });
+      response.status(404).json({ error: "id does not exist" });
     }
     
   } catch (error) {
@@ -189,12 +131,16 @@ module.exports = router;
 
 
 
-// {
-//     title: 'Falafel',
-//     description: "Homemade vegan falafel wrap",
-//     location: "Beirut",
-//     Hosting_time: 2022 - 04 - 25 18: 30: 00,
-//     max_number_of_guests: 20,
-//     price: 50,
-//     created_date: 2022 - 03 - 28
-// });
+
+
+
+
+
+
+
+
+
+
+
+
+
