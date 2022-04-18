@@ -5,30 +5,32 @@ const inputValidation = require("../validations/reservationsValidation");
 const validationFilter = require("../validations/filterValidation");
 
 const currentDate = new Date();
+router.post("/", inputValidation, postReservationsHandler);
+router.get("/", validationFilter, getReservationsHandler);
+router.put("/", validationFilter, putReservationsHandler);
+router.delete("/", validationFilter, deleteReservationsHandler);
 
-router.get("/", validationFilter, async (request, response) => {
+async function getReservationsHandler(request, response) {
+  let reservations = await knex("reservations").select();
   try {
     if ("id" in request.query) {
-      const reservations = await knex("reservations")
-        .select()
-        .where("id", "=", request.query.id);
-      if (Object.keys(reservations).length !== 0) {
-        response.json(reservations);
-      } else {
-        response
-          .status(404)
-          .json(`No reservation matches the id: ${request.query.id}`);
-      }
+      reservations = reservations.filter(
+        (reservation) => parseInt(reservation.id) === parseInt(request.query.id)
+      );
+    }
+    if (reservations.length !== 0) {
+      response.send(reservations);
     } else {
-      const reservations = await knex("reservations").select();
-      response.json(reservations);
+      response
+        .status(404)
+        .send(`No reservation matches the id: ${request.query.id}`);
     }
   } catch (error) {
     throw error;
   }
-});
+}
 
-router.post("/", inputValidation, async (request, response) => {
+async function postReservationsHandler(request, response) {
   try {
     const insertRequest = request.body;
 
@@ -41,40 +43,40 @@ router.post("/", inputValidation, async (request, response) => {
       contact_name: insertRequest.contact_name,
       contact_email: insertRequest.contact_email,
     });
-    response.json(reservations);
+    response.send("Successfully Added");
   } catch (error) {
     throw error;
   }
-});
+}
 
-router.put("/", validationFilter, async (request, response) => {
+async function putReservationsHandler(request, response) {
   try {
     const result = await knex("reservations")
       .where("id", "=", request.query.id)
       .update(request.body);
     if (result > 0) {
-      response.json({ message: "Updated" });
+      response.send("Successfully Updated");
     } else {
-      response.status(404).json({ error: "id does not exist" });
+      response.status(404).send({ error: "id does not exist" });
     }
   } catch (error) {
     throw error;
   }
-});
+}
 
-router.delete("/", validationFilter, async (request, response) => {
+async function deleteReservationsHandler(request, response) {
   try {
     const result = await knex("reservations")
       .where("id", "=", request.query.id)
       .del();
     if (result > 0) {
-      response.json({ message: "Deleted" });
+      response.send("Successfully Deleted");
     } else {
-      response.status(404).json({ error: "id does not exist" });
+      response.status(404).send({ error: "id does not exist" });
     }
   } catch (error) {
     throw error;
   }
-});
+}
 
 module.exports = router;
