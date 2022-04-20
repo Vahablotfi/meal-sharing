@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { GlobalProvider } from "./components/TestComponent/GlobalProvider";
 import TestComponent from "./components/TestComponent/TestComponent";
 
 function App() {
@@ -12,7 +13,9 @@ function App() {
         <p>lol</p>
       </Route>
       <Route exact path="/test-component">
-        <TestComponent></TestComponent>
+        <GlobalProvider>
+          <TestComponent></TestComponent>
+        </GlobalProvider>
       </Route>
     </Router>
   );
