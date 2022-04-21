@@ -1,8 +1,13 @@
 import React from "react";
-// import falafel from "./images/falafel.jpg";
+// import hyf from "../images/falafel.jpg";
 
 function FalafelPic() {
-  return <>{"dont know"}</>;
+  return (
+    <div>
+      "this is a crazy component"
+      {/* <img src={hyf} alt="hyf image"></img> */}
+    </div>
+  );
 }
 
 export default FalafelPic;

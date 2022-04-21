@@ -10,10 +10,6 @@ function App() {
       <Route exact path="/">
         <p>test</p>
       </Route>
-      <img
-        src={`${process.env.PUBLIC_URL}/falafel.jpg`}
-        alt="picture of a falafel plate"
-      />
       <Route exact path="/lol">
         <p>lol</p>
       </Route>
