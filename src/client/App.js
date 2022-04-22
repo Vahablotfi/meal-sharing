@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import MealCards from "./components/mealcards/MealCards";
-import { GlobalProvider } from "./components/TestComponent/GlobalProvider";
+import { GlobalProvider } from "./components/GlobalProvider";
+import MenuList from "./components/mealcards/MenuList";
 import TestComponent from "./components/TestComponent/TestComponent";
 
 function App() {
@@ -11,12 +11,12 @@ function App() {
         <p>test</p>
       </Route>
       <Route exact path="/menu">
-        <MealCards></MealCards>
+        <GlobalProvider>
+          <MenuList></MenuList>
+        </GlobalProvider>
       </Route>
       <Route exact path="/test-component">
-        <GlobalProvider>
-          <TestComponent></TestComponent>
-        </GlobalProvider>
+        <TestComponent></TestComponent>
       </Route>
     </Router>
   );
