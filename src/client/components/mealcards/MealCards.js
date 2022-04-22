@@ -5,7 +5,7 @@ const MealCards = ({ meal }) => {
   return (
     <div className="meal-card">
       <div className="meal-image">
-        <img src={`https://source.unsplash.com/random/200x200?${meal.title}`} />
+        <img src={`https://source.unsplash.com/random/200x200?food`} />
       </div>
       <h4>{meal.title}</h4>
       <h6>{meal.price}</h6>
