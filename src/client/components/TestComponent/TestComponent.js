@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import React, { useContext } from "react";
+import MealCards from "../mealcards/MealCards";
 import FalafelPic from "./FalafelPic";
 import { GlobalContext } from "./GlobalProvider";
 import "./testComponentStyle.css";
@@ -16,6 +17,8 @@ export default function TestComponent() {
   return (
     <section className="test-component">
       <FalafelPic />
+      <MealCards></MealCards>
+
       <p>in a component</p>
       {meals.map((meal, index) => (
         <div key={index}>{meal.title}</div>
