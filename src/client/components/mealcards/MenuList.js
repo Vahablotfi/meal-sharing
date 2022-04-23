@@ -6,9 +6,11 @@ import falafel from "../images/falafel.jpg";
 import CardImage from "./CardImages";
 
 function MenuList() {
-  const meals = useContext(GlobalContext);
+  const data = useContext(GlobalContext);
+  // const joinedMeals = useContext(GlobalContext);
+  const meals = data.meals;
 
-  console.log(meals);
+  console.log(data);
   return (
     <div className="meal-menu">
       {meals.map((meal, index) => (

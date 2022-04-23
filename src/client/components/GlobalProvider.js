@@ -21,6 +21,7 @@ export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
   const [meals, setMeals] = useState([]);
+  const [joinedMeals, setJoinedMeals] = useState([]);
 
   useEffect(() => {
     fetch("/api/meals")
@@ -28,8 +29,16 @@ export const GlobalProvider = ({ children }) => {
       .then((data) => setMeals(data));
   }, []);
 
+  useEffect(() => {
+    fetch("/api/joinedMeals")
+      .then((response) => response.json())
+      .then((data) => setJoinedMeals(data));
+  }, []);
+
   return (
-    <GlobalContext.Provider value={meals}>{children}</GlobalContext.Provider>
+    <GlobalContext.Provider value={{ meals: meals, joinedMeals: joinedMeals }}>
+      {children}
+    </GlobalContext.Provider>
   );
 };
 
