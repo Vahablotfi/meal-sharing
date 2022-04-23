@@ -19,5 +19,5 @@ export default function TestComponent() {
 /*
 
 
-        
+         "webpack": "4.35.0",
 */
