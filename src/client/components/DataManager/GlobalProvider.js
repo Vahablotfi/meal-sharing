@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import React, { useEffect, useState } from "react";
+import useFetch from "./useFetch";
 
 export const GlobalContext = createContext();
 
@@ -20,21 +21,47 @@ export const GlobalContext = createContext();
 // export default GlobalState;
 
 export const GlobalProvider = ({ children }) => {
-  const [meals, setMeals] = useState([]);
-  const [joinedMeals, setJoinedMeals] = useState([]);
+  // const [joinedMeals, setJoinedMeals] = useState([]);
+  // const [meals, setMeals] = useState([]);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch("/api/meals")
-      .then((response) => response.json())
-      .then((data) => setMeals(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/meals")
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw Error("something went wrong please try again later!");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setMeals(data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       setLoading(false);
+  //       setError(error.message);
+  //       console.log(error.message);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    fetch("/api/joinedMeals")
-      .then((response) => response.json())
-      .then((data) => setJoinedMeals(data));
-  }, []);
-
+  // useEffect(() => {
+  //   fetch("/api/joinedMeals")
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw error("something went wrong please try again later!");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setJoinedMeals(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // }, []);
+  const { data: meals } = useFetch("/api/meals");
+  const { data: joinedMeals } = useFetch("/api/joinedMeals");
   return (
     <GlobalContext.Provider value={{ meals: meals, joinedMeals: joinedMeals }}>
       {children}
