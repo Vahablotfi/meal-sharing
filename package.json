@@ -1,5 +1,5 @@
 {
-  "name": "c",
+  "name": "meal-sharing",
   "version": "1.0.0",
   "description": "Website for sharing meals",
   "engines": {
@@ -21,14 +21,11 @@
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
-<<<<<<< HEAD
-=======
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@hookform/resolvers": "^2.8.8",
->>>>>>> frontend
     "@joi/date": "^2.1.0",
     "@types/xml": "^1.0.3",
     "app-root-path": "^2.1.0",
@@ -59,32 +56,15 @@
     "serve-favicon": "2.4.5",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
-    "webpack": "4.36.0",
+    "webpack": "4.35.0",
     "webpack-cli": "3.3.5"
   },
   "devDependencies": {
     "case-sensitive-paths-webpack-plugin": "^2.3.0",
     "concurrently": "^5.3.0",
-<<<<<<< HEAD
-    "nodemon": "^1.19.4",
-    "sequelize-cli": "^5.4.0",
-    "webpack-dev-server": "^3.11.0"
-  },
-  "main": "webpack.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Vahablotfi/meal-sharing.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Vahablotfi/meal-sharing/issues"
-  },
-  "homepage": "https://github.com/Vahablotfi/meal-sharing#readme",
-  "keywords": []
-=======
     "file-loader": "^6.2.0",
     "nodemon": "^1.12.1",
     "sequelize-cli": "^5.4.0",
     "webpack-dev-server": "^3.11.0"
   }
->>>>>>> frontend
 }
