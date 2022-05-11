@@ -1,0 +1,30 @@
+.footer{
+
+ position: relative;
+ height: 100vh;
+}
+
+.footer-top{
+    display: flex;
+    flex-direction: row;
+        justify-content: space-evenly;
+
+}
+
+.footer-list{
+    list-style: none;
+}
+ .footer-icons{
+     display: flex;
+     flex-wrap: wrap;
+    width: 25%;
+   align-items:center;
+   justify-content: space-around;
+ }
+ .footer-title{
+     font-size: larger;
+ }
+ .copyright{
+     position: absolute;
+     bottom: 0;
+ }

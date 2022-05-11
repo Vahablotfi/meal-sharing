@@ -1,30 +1,35 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import BookMeal from "./components/BookingForms/BookMeal";
+import ReserveMeal from "./components/BookingForms/ReserveMeal";
+import AddMeal from "./components/BookingForms/AddMeal";
 import { GlobalProvider } from "./components/DataManager/GlobalProvider";
-import MenuList from "./components/meal-components/MenuList";
-import SingleMeal from "./components/meal-components/SingleMeal";
-import TestComponent from "./components/TestComponent/TestComponent";
+import MenuList from "./components/MealMenu/MenuList";
+// import TestComponent from "./components/TestComponent/TestComponent";
+import SingleMealPage from "./components/meal-components/SingleMealPage";
+// import ReviewLists from "./components/Reviews/ReviewLists";
+import HomePage from "./Pages/HomePgae/HomePage";
 
 function App() {
   return (
     <Router>
       <GlobalProvider>
-        <Route exact path="/">
-          <p>test</p>
-        </Route>
-        <Route exact path="/Book-Meal">
-          <BookMeal />
-        </Route>
-        <Route exact path="/menu">
-          <MenuList></MenuList>
-        </Route>
-        <Route exact path="/menu/:id">
-          <SingleMeal />
-        </Route>
-        <Route exact path="/test-component">
-          <TestComponent></TestComponent>
-        </Route>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route exact path="/Reserve-Meal">
+            <ReserveMeal />
+          </Route>
+          <Route exact path="/Add-Meal">
+            <AddMeal />
+          </Route>
+          <Route exact path="/menu">
+            <MenuList></MenuList>
+          </Route>
+          <Route exact path="/menu/:id">
+            <SingleMealPage />
+          </Route>
+        </Switch>
       </GlobalProvider>
     </Router>
   );

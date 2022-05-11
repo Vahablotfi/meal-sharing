@@ -5,11 +5,15 @@
   box-sizing: border-box;
 }
 
-/* #root {
+   /* #root {
   padding-left: 10%;
   padding-right: 10%;
-  height: 100vh;
-}*/
+   height: 100%; 
+}   */
+
+
+
+
 
 body {
   margin: 0;
@@ -37,7 +41,7 @@ button {
   font-size: 17px;
 } */
 
-/* @media screen and (max-width: 1400px) {
+@media screen and (max-width: 1400px) {
   #root {
     padding-left: 10%;
     padding-right: 10%;
@@ -49,4 +53,4 @@ button {
     padding-left: 0;
     padding-right: 0;
   }
-}  */
+} 
