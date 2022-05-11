@@ -1,0 +1,31 @@
+.homePage-reviews{
+          display: flex;
+          flex-wrap: wrap;
+       justify-content: center;
+       align-items: flex-start;
+    margin-left: -8px;
+     margin-right: -8px;
+     overflow: scroll;
+}
+
+.reviewCards{
+       display: flex;
+   
+    flex-direction: column;
+    height: 240;
+    margin: 2%;
+       padding: 5%;
+  
+    background-color: #EF6D6D;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis:220px;
+    border-radius: 30px;
+    font-family: system-ui;
+}
+.review-description{
+      display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+ 
+}

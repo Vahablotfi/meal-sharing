@@ -1,19 +1,36 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import TestComponent from "./components/TestComponent/TestComponent";
+import ReserveMeal from "./components/BookingForms/ReserveMeal";
+import AddMeal from "./components/BookingForms/AddMeal";
+import { GlobalProvider } from "./components/DataManager/GlobalProvider";
+import MenuList from "./components/MealMenu/MenuList";
+// import TestComponent from "./components/TestComponent/TestComponent";
+import SingleMealPage from "./components/meal-components/SingleMealPage";
+// import ReviewLists from "./components/Reviews/ReviewLists";
+import HomePage from "./Pages/HomePgae/HomePage";
 
 function App() {
   return (
     <Router>
-      <Route exact path="/">
-        <p>test</p>
-      </Route>
-      <Route exact path="/lol">
-        <p>lol</p>
-      </Route>
-      <Route exact path="/test-component">
-        <TestComponent></TestComponent>
-      </Route>
+      <GlobalProvider>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route exact path="/Reserve-Meal">
+            <ReserveMeal />
+          </Route>
+          <Route exact path="/Add-Meal">
+            <AddMeal />
+          </Route>
+          <Route exact path="/menu">
+            <MenuList></MenuList>
+          </Route>
+          <Route exact path="/menu/:id">
+            <SingleMealPage />
+          </Route>
+        </Switch>
+      </GlobalProvider>
     </Router>
   );
 }
