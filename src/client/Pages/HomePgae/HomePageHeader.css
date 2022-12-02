@@ -9,9 +9,9 @@ background-image: url("https://source.unsplash.com/random/1200x1700?food");
   background-position: center; 
   background-repeat: no-repeat; 
   width: 100%;
-  /* background-color: rgb(179, 230, 213); */
+ 
   background-color: #CDBE78;
-  /* background-size: max-content; */
+  
 }
 .homePage-text{
     width: 50%;
@@ -26,16 +26,7 @@ background-image: url("https://source.unsplash.com/random/1200x1700?food");
 font-family: "Pacifico",sans-serif;
  color: rgb(90, 4, 4);
 }
-/* .homePage-btn{
-    color: azure;
-    font-weight: bold;
-    background: rgb(116, 3, 7);
-        width: inherit;
-    border-radius: 60px;
-        font-size: smaller;
-        padding: auto;
-        font-family: monospace;
-} */
+
 
 
          .homePage-btn {background-image: linear-gradient(to right, #000428 0%, #004e92  51%, #000428  100%)}
