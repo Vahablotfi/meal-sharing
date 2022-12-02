@@ -7,7 +7,7 @@ const reservationValidSchema = Joi.object({
   number_of_guests: Joi.number().integer().required(),
   meal_id: Joi.number().integer().required(),
   created_date: Joi.date().timestamp(),
-  contact_phonenumber: Joi.number().required(),
+  contact_phonenumber: Joi.number().min(8).required(),
   contact_name: Joi.string().min(4).required(),
   contact_email: Joi.string().email(),
 });

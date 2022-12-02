@@ -3,6 +3,7 @@ const router = express.Router();
 const knex = require("../database");
 const inputValidation = require("../validations/mealsValidation");
 const validationFilter = require("../validations/filterValidation");
+
 const { request, response } = require("express");
 const currentDate = new Date();
 
@@ -44,6 +45,8 @@ async function getMealsHandler(request, response) {
         .sum("number_of_guests AS reserved_guests")
         .join("meals", "meal_id", "=", "meals.id")
         .groupBy("meal_id");
+
+
 
       const availableMeals = totalReservation.filter(
         (reservation) =>
@@ -111,8 +114,6 @@ async function deleteMealsHandler(request, response) {
 
 
 module.exports = router;
-
-
 
 
 

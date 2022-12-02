@@ -11,6 +11,7 @@ const filterValidSchema = Joi.object({
 
 const validationFilter = (request, response, next) => {
   const { error, value } = filterValidSchema.validate(request.query);
+
   if (error) {
     response.status(400).send(error.message);
   } else {

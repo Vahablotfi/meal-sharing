@@ -7,7 +7,7 @@ const reviewValidSchema = Joi.object({
   title: Joi.string(),
   meal_id: Joi.number().integer().required(),
   created_date: Joi.date(),
-  description: Joi.string(),
+  description: Joi.string().alphanum(),
   stars: Joi.number().min(1).max(5).integer().required(),
 });
 
