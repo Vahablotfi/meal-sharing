@@ -46,6 +46,8 @@ async function getMealsHandler(request, response) {
         .join("meals", "meal_id", "=", "meals.id")
         .groupBy("meal_id");
 
+
+
       const availableMeals = totalReservation.filter(
         (reservation) =>
           Number(reservation.reserved_guests) < reservation.max_number_of_guests
@@ -81,6 +83,7 @@ async function postMealsHandler(request, response) {
   }
 }
 
+
 async function putMealsHandler(request, response) {
   try {
     const result = await knex("meals")
@@ -109,6 +112,8 @@ async function deleteMealsHandler(request, response) {
   }
 }
 
+
 module.exports = router;
+
 
 

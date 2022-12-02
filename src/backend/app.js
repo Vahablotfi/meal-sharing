@@ -5,7 +5,6 @@ const path = require("path");
 
 const mealsRouter = require("./api/meals");
 const reservationsRouter = require("./api/reservations");
-
 const mealsPlusBooking = require("./api/mealsPlus");
 
 const reviewsRouter = require("./api/reviews");
@@ -26,12 +25,8 @@ app.use(cors());
 
 router.use("/meals", mealsRouter);
 router.use("/reservations", reservationsRouter);
-
-router.use("/reviews", reviewsRouter);
-
 router.use("/mealsPlus", mealsPlusBooking);
 router.use("/reviews", reviewsRouter);
-
 
 
 if (process.env.API_PATH) {

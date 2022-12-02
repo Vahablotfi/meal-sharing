@@ -4,9 +4,7 @@ import ReserveMeal from "./components/BookingForms/ReserveMeal";
 import AddMeal from "./components/BookingForms/AddMeal";
 import { GlobalProvider } from "./components/DataManager/GlobalProvider";
 import MenuList from "./components/MealMenu/MenuList";
-// import TestComponent from "./components/TestComponent/TestComponent";
 import SingleMealPage from "./components/meal-components/SingleMealPage";
-// import ReviewLists from "./components/Reviews/ReviewLists";
 import HomePage from "./Pages/HomePgae/HomePage";
 
 function App() {

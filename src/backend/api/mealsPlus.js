@@ -5,7 +5,6 @@ const knex = require("../database");
 router.get("/", async (request, response) => {
   try {
     const meals = await knex("meals").select();
-    // response.json(reservations);
     const totalReservation = await knex("reservations")
       .select(
         "meal_id",
@@ -27,12 +26,6 @@ router.get("/", async (request, response) => {
         Number(reservation.reserved_guests) >= reservation.max_number_of_guests
     );
 
-    // const availableMealId = availableMeals.map((meal) => meal.meal_id);
-    // meals = meals.filter((meal) => availableMealId.includes(meal.id));
-    // const availableMeals = meals.filter((meal) => {
-    //   meal.id !== bookedMeals.meal_id;
-    // });
-
     response.json(totalReservation);
   } catch (error) {
     throw error;
@@ -41,12 +34,4 @@ router.get("/", async (request, response) => {
 
 module.exports = router;
 
-/*
-  try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-   
-  } catch (error) {
-    throw error;
-  }
 
-*/

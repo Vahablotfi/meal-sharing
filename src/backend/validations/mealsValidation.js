@@ -5,9 +5,8 @@ const currentDate = new Date();
 const mealsValidSchema = Joi.object({
   id: Joi.number().integer(),
   title: Joi.string().required(),
-
-  description: Joi.string().alphanum(),
-  location: Joi.string().alphanum().required(),
+   description: Joi.string(),
+  location: Joi.string().required(),
 
   created_date: Joi.date(),
   Hosting_time: Joi.date().greater("now").required(),
