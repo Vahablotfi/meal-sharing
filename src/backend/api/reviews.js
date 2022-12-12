@@ -12,7 +12,7 @@ router.put("/", validationFilter, putReviewHandler);
 router.delete("/", validationFilter, deleteReviewHandler);
 
 async function getReviewsHandler(request, response) {
-  let reviews = await knex("reviews").select();
+  let reviews = await knex("Reviews").select();
   try {
     if ("id" in request.query) {
       reviews.filter((review) => parseInt(review.id) === request.query.id);
@@ -32,7 +32,7 @@ async function getReviewsHandler(request, response) {
 async function postReviewHandler(request, response) {
   try {
     const insertRequest = request.body;
-    const reviews = await knex("reviews").insert({
+    const reviews = await knex("Reviews").insert({
       id: insertRequest.id,
       title: insertRequest.title,
       description: insertRequest.description,
@@ -53,7 +53,7 @@ async function postReviewHandler(request, response) {
 
 async function putReviewHandler(request, response) {
   try {
-    const result = await knex("reviews")
+    const result = await knex("Reviews")
       .where("id", "=", request.query.id)
       .update(request.body);
     if (result > 0) {
@@ -68,7 +68,7 @@ async function putReviewHandler(request, response) {
 
 async function deleteReviewHandler(request, response) {
   try {
-    const result = await knex("reviews")
+    const result = await knex("Reviews")
       .where("id", "=", request.query.id)
       .del();
     if (result > 0) {

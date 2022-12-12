@@ -11,7 +11,7 @@ router.put("/", validationFilter, putReservationsHandler);
 router.delete("/", validationFilter, deleteReservationsHandler);
 
 async function getReservationsHandler(request, response) {
-  let reservations = await knex("reservations").select();
+  let reservations = await knex("Reservations").select();
   try {
     if ("id" in request.query) {
       reservations = reservations.filter(
@@ -34,7 +34,7 @@ async function postReservationsHandler(request, response) {
   try {
     const insertRequest = request.body;
 
-    const reservations = await knex("reservations").insert({
+    const reservations = await knex("Reservations").insert({
       id: insertRequest.id,
       number_of_guests: insertRequest.number_of_guests,
       meal_id: insertRequest.meal_id,
@@ -51,7 +51,7 @@ async function postReservationsHandler(request, response) {
 
 async function putReservationsHandler(request, response) {
   try {
-    const result = await knex("reservations")
+    const result = await knex("Reservations")
       .where("id", "=", request.query.id)
       .update(request.body);
     if (result > 0) {
@@ -66,7 +66,7 @@ async function putReservationsHandler(request, response) {
 
 async function deleteReservationsHandler(request, response) {
   try {
-    const result = await knex("reservations")
+    const result = await knex("Reservations")
       .where("id", "=", request.query.id)
       .del();
     if (result > 0) {

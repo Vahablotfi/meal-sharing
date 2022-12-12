@@ -5,7 +5,7 @@ import AddMeal from "./components/BookingForms/AddMeal";
 import { GlobalProvider } from "./components/DataManager/GlobalProvider";
 import MenuList from "./components/MealMenu/MenuList";
 import SingleMealPage from "./components/meal-components/SingleMealPage";
-import HomePage from "./Pages/HomePgae/HomePage";
+import HomePage from "./Pages/HomePage/HomePage";
 
 function App() {
   return (

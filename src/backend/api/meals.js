@@ -13,7 +13,7 @@ router.put("/", validationFilter, putMealsHandler);
 router.delete("/", validationFilter, deleteMealsHandler);
 
 async function getMealsHandler(request, response) {
-  let meals = await knex("meals");
+  let meals = await knex("Meals");
 
   if ("id" in request.query) {
     meals = meals.filter(
@@ -40,20 +40,29 @@ async function getMealsHandler(request, response) {
   }
   try {
     if ("availableReservations" in request.query) {
-      const totalReservation = await knex("reservations")
-        .select("meal_id", "title", "max_number_of_guests")
+      const fullyBookedMeals = await knex("Reservations")
         .sum("number_of_guests AS reserved_guests")
-        .join("meals", "meal_id", "=", "meals.id")
-        .groupBy("meal_id");
+        .select(
+          "meal_id",
+          "title",
+          "Meals.max_number_of_guests",
+          "Meals.title",
+          "Meals.Hosting_time",
+          "Meals.price",
+          "Meals.description",
+          "Meals.location"
+        )
+        .join("Meals", "meal_id", "=", "Meals.id")
+        .groupBy("meal_id")
+        .havingRaw("reserved_guests = max_number_of_guests");
 
-
-
-      const availableMeals = totalReservation.filter(
-        (reservation) =>
-          Number(reservation.reserved_guests) < reservation.max_number_of_guests
-      );
-      const availableMealId = availableMeals.map((meal) => meal.meal_id);
-      meals = meals.filter((meal) => availableMealId.includes(meal.id));
+      const availableMeals = meals.filter((meal) => {
+        const bookedMealId = fullyBookedMeals.map(
+          (bookedMeal) => bookedMeal.meal_id
+        );
+        return !bookedMealId.includes(meal.id);
+      });
+      meals = availableMeals;
     }
     if (meals.length === 0) {
       response.send("no match for your request");
@@ -67,7 +76,7 @@ async function getMealsHandler(request, response) {
 async function postMealsHandler(request, response) {
   try {
     const insertRequest = request.body;
-    const meals = await knex("meals").insert({
+    const meals = await knex("Meals").insert({
       id: insertRequest.id,
       title: insertRequest.title,
       description: insertRequest.description,
@@ -83,10 +92,9 @@ async function postMealsHandler(request, response) {
   }
 }
 
-
 async function putMealsHandler(request, response) {
   try {
-    const result = await knex("meals")
+    const result = await knex("Meals")
       .where("id", "=", request.query.id)
       .update(request.body);
     if (result > 0) {
@@ -101,7 +109,7 @@ async function putMealsHandler(request, response) {
 
 async function deleteMealsHandler(request, response) {
   try {
-    const result = await knex("meals").where("id", "=", request.query.id).del();
+    const result = await knex("Meals").where("id", "=", request.query.id).del();
     if (result > 0) {
       response.send("Successfully Deleted");
     } else {
@@ -112,8 +120,8 @@ async function deleteMealsHandler(request, response) {
   }
 }
 
-
 module.exports = router;
+
 
 
 

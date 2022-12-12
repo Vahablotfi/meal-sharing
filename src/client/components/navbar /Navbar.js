@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <div className="navbar">
       <div className="navContainer">
-        <Link to={"/menu"}>
+        <Link to={"/"}>
           <span className="logo">
             <img src={logo} alt="logo" />
           </span>

@@ -5,7 +5,7 @@ export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
   const { data: meals } = useFetch("/api/meals");
-  const { data: mealsWithBookings } = useFetch("/api/mealsPlus");
+  const { data: fullyBookedMeals } = useFetch("/api/mealsPlus");
   const { data: reviews } = useFetch("/api/reviews");
 
   function spotCounter(obj) {
@@ -40,7 +40,7 @@ export const GlobalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
-        meals: dataFixer(meals, mealsWithBookings),
+        meals: dataFixer(meals, fullyBookedMeals),
         reviews: reviews,
       }}
     >
