@@ -29,9 +29,10 @@
 
 
 .logo img{
-  width: 12%;
-  height: 12%;
-  border-radius: 80%;
+  width: 35%;
+  margin-left: -10%;
+  margin-bottom: -3%;
+
 }
 .text-link {
     color: inherit;
