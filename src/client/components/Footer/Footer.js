@@ -23,7 +23,8 @@ function Footer() {
         </ul>
 
         <div className="contact-info">
-          <h2>Follow us on social media</h2>
+          <h3>Follow us on <br />
+            social media</h3>
           <div className="footer-Icons">
             <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" />
             <img src="https://img.icons8.com/color/48/000000/facebook-new.png" />
@@ -35,9 +36,6 @@ function Footer() {
           </div>
         </div>
       </div>
-      <p className="copyright">
-        License free, Made by Vahab Lotfi for education purpose.
-      </p>
     </div>
   );
 }

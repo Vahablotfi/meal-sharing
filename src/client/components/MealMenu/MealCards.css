@@ -1,63 +1,62 @@
 .meal-menu{
-    background-color: #FFE6AB;
-    display: block;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    text-align: center;
-    color: white;
-    padding: 0 20%;
-   
+ background-color: #FFE1A8;
+ flex-wrap: wrap;
+ justify-content: space-evenly;
+ text-align: center;
+ color: white;
+ padding: 1% 20%;
 }
 
 .meal-card{
-    display: flex;
-    flex-direction: row;
-    height: 240;
-    margin: 4%;
-    background-color: #EF6D6D;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis:220px;
-    border-radius: 30px;
-    font-family: system-ui;
+ display: flex;
+ flex-direction: row;
+ height: 240;
+ margin: 4%;
+ background-color: #723D46;
+ flex-grow: 0;
+ flex-shrink: 0;
+ flex-basis:220px;
+ border-radius: 30px;
+ font-family: system-ui;
 }
 img.meal-image{
-    margin:0;
-    padding:0;
-  height: fit-content;
-    width: 30%;
-    border-radius: 3px;
+ margin:0;
+ padding:0;
+ height: fit-content;
+ width: 30%;
+ border-radius: 3px;
 }
 
 .meal-Card-title{
-    margin:unset;
-   
+ margin:unset;
 }
 
 
 .event-info{
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
+ display: flex;
+ justify-content: space-evenly;
+ flex-direction: column;
 }
+
 .event-info h6{
-        margin: 3%;
+ margin: 3%;
 }
+
 .event-info button{
-   height: 2em;
-     border: hidden;
-     border-radius: 3em;
-     width: 90%;
-    margin:5%;
+ height: 2em;
+ border: hidden;
+ border-radius: 3em;
+ width: 90%;
+ margin:5%;
 }
 
 .text-link {
-    color: inherit;
-    text-decoration: inherit;
+ color: inherit;
+ text-decoration: inherit;
 }
 
 .meal-card-btn{
-    background-color:  #FFBBBB;
+ background-color:  #FFBBBB;
 }
 
 
