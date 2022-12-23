@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./smallMenuStyle.css";
 
 function SmallMenu({ meal }) {
@@ -17,7 +16,7 @@ function SmallMenu({ meal }) {
     <div className="smallMenuCard">
       <img
         className="smallMenuCard-pic"
-        src={`https://source.unsplash.com/random/200x200?food`}
+        src={`https://source.unsplash.com/random?food`}
       />
       <div className="smallMenuCard-info">
         <h4 className="smallMenuCard-title">{meal.title}</h4>
@@ -33,5 +32,3 @@ function SmallMenu({ meal }) {
 }
 
 export default SmallMenu;
-
-

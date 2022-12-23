@@ -1,77 +1,115 @@
 .sample-menu{
-       display: flex;
-       justify-content: center;
-       align-items: center;
-    margin-left: -8px;
-     margin-right: -8px;                       
+ display: flex;
+ justify-content: flex-start;
+ align-items: flex-start;
+ margin-left: -8px;
+ margin-right: -8px;
 }
-.smallMenuCard-separator{
-    width: 50%;
-    height: 5px;
-    border-radius: 20%;
-    color: #41515202;
-    
-}
-.smallMenuCard{
- flex-basis: 25%;
 
+.meal-link {
+ color: inherit;
+ text-decoration: inherit;
+ display: flex;
+ justify-content: center;
+ align-items: flex-start;
+}
+
+.smallMenuCard-separator{
+ width: 50%;
+ height: 5px;
+ border-radius: 20%;
+ color: #41515202;
+}
+
+.smallMenuCard{
+ width: 80%;
+ height: 90vh;
+ display: flex;
+ justify-content: flex-start;
+ align-items: flex-start;
+ flex-wrap: wrap;
  padding-left: 8px;
  padding-right: 8px;
-
-background-color: #B3ced7;
-border: 2px solid;
-  border-radius: 3px;
-margin: 20px;
+ background-color: #E26D5C;
+ border: 2px solid;
+ border-radius: 3px;
+ margin: 20px;
 }
 
-
-
- .smallMenuCard-btn {background-image: linear-gradient(to right, #005C97 0%, #363795  51%, #005C97  100%)}
-
- .smallMenuCard-btn {
+.smallMenuCard-btn {
+ background-image: linear-gradient(to right, #005C97 0%, #363795  51%, #005C97  100%);
  margin: 10px;
  padding: 15px 45px;
  text-align: center;
  text-transform: uppercase;
-  transition: 0.5s;
+ transition: 0.5s;
  background-size: 200% auto;
-  color: white;            
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
+ color: white;            
+ box-shadow: 0 0 20px #eee;
+ border-radius: 10px;
  display: block;
- }
-
- .smallMenuCard-btn:hover {
-   background-position: right center;
-   color: #fff;
-   text-decoration: none;
-      }
-         
-
-
-
-.smallMenuCard-info{
-color: rgba(7, 31, 46, 0.519);
-    margin: 5%;
-    font-family: system-ui;
-    font-size: x-large;
-    font-weight: bold;
-  
- }
-
-
-.meal-link {
-    color: inherit;
-    text-decoration: inherit;
 }
 
+.smallMenuCard-btn:hover {
+ background-position: right center;
+ color: #fff; 
+ text-decoration: none;
+}
 
+.smallMenuCard-title{
+ width: 80%;
+}
 
+.smallMenuCard-info{
+ color: #FFE1A8;
+ margin: 5%;
+ font-family: system-ui;
+ font-size: x-large;
+ font-weight: bold;
+}
 
 .smallMenuCard-pic{
+ width: 80%;
+ padding-left: 3em;
+}
 
-    display: flex;
-} 
+@media only screen and (max-width: 960px) {
+.sample-menu{
+ flex-wrap: wrap;
+ }
+.meal-link {
+ max-width: 50%;
+ }
+ }
 
+@media only screen and (max-width: 600px) {
+
+.sample-menu{
+ flex-wrap: wrap;
+}
+
+.meal-link {
+ max-width: 50%;
+}
+
+.smallMenuCard{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background-color: #B3ced7;
+ border: 2px solid;
+ border-radius: 3px;
+}
+
+.smallMenuCard-pic{
+ width: 50%;
+ padding: 0;
+ margin: 0;
+}
+
+.smallMenuCard-title{
+ width: 100%;
+}
+}
 
 

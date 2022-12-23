@@ -1,51 +1,73 @@
  @import url("https://fonts.googleapis.com/css?family=Pacifico");
 
 .homePage{
-    width: 100%;
+ width: 100%;
 }
+
 .homePage-picture{
-background-image: url("https://source.unsplash.com/random/1200x1700?food");
-  height: 800px; 
-  background-position: center; 
-  background-repeat: no-repeat; 
-  width: 100%;
- 
-  background-color: #CDBE78;
-  
+ background-image: url("../../assets/Images/mealSharing-landingPage.jpg");
+ min-height: 800px;
+ background-position: center; 
+ background-repeat: no-repeat; 
+ background-color: #CDBE78;
 }
+
 .homePage-text{
-    width: 50%;
-    font-size: 36px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 0px;
-    margin-left: 30px;
-    font-family: "Pacifico",sans-serif;
+ width: 50%;
+ font-size: 36px;
+ display: flex;
+ flex-direction: column;
+ margin-top: 0px;
+ margin-left: 30px;
+ font-family: "Pacifico",sans-serif;
 }
+
 .homePage-text h1  {
-font-family: "Pacifico",sans-serif;
+ font-family: "Pacifico",sans-serif;
  color: rgb(90, 4, 4);
 }
 
+.homePage-btn {
+ background-image: linear-gradient(to right, #000428 0%, #004e92  51%, #000428  100%);
+ margin:5px;
+ padding: 15px 45px;
+ text-align: center;
+ text-transform: uppercase;
+ transition: 0.5s;
+ background-size: 200% auto;
+ color: white;            
+ box-shadow: 0 0 20px #eee;
+ border-radius: 10px;
+ display: block;
+}
+
+.homePage-btn:hover {
+ background-position: right center; 
+ color: #fff;
+ text-decoration: none;
+}
+
+ @media only screen and (max-width: 960px) {
+
+  .homePage-text{
+   font-size: 1.5rem;
+  }
+}
 
 
-         .homePage-btn {background-image: linear-gradient(to right, #000428 0%, #004e92  51%, #000428  100%)}
-         .homePage-btn {
-            margin:5px;
-            padding: 15px 45px;
-            text-align: center;
-            text-transform: uppercase;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 20px #eee;
-            border-radius: 10px;
-            display: block;
-          }
+@media only screen and (max-width: 600px) {
 
-          .homePage-btn:hover {
-            background-position: right center; 
-             color: #fff;
-             text-decoration: none;
-           }
+.homePage{
+ width: 50%;
+}
+
+.homePage-text{
+ font-size: 16px;
+}
+
+.homePage-picture{
+background-image: url("../../assets/Images/mealSharing-landingPage.jpg");
+  }
+}
+
 

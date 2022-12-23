@@ -6,11 +6,14 @@ import { GlobalProvider } from "./components/DataManager/GlobalProvider";
 import MenuList from "./components/MealMenu/MenuList";
 import SingleMealPage from "./components/meal-components/SingleMealPage";
 import HomePage from "./Pages/HomePage/HomePage";
+import Navbar from "./components/navbar /Navbar";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
     <Router>
       <GlobalProvider>
+        <Navbar />
         <Switch>
           <Route exact path="/">
             <HomePage />
@@ -28,6 +31,7 @@ function App() {
             <SingleMealPage />
           </Route>
         </Switch>
+        <Footer />
       </GlobalProvider>
     </Router>
   );
